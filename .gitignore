@@ -1,0 +1,7 @@
+/.vscode
+/config.ini
+/config_ini.py
+/hotkey_test.py
+/main.ui
+/txt_extract.py
+/__pycache__
