@@ -1,8 +1,5 @@
 from PIL import ImageGrab
-# import random
-# import os
 import sys
-# import pymsgbox
 from PyQt5 import QtWidgets, uic
 import pytesseract
 import config_ini
@@ -38,9 +35,16 @@ class GUI(QtWidgets.QMainWindow):
         self.result_text.setText(self.get_text_from_clipboard())
 
     def get_text_from_clipboard(self):
+        image_from_clipboard = ImageGrab.grabclipboard()
         try:
             self.result_text.setStyleSheet("color: black;")
-            return pytesseract.image_to_string(ImageGrab.grabclipboard())
+            return pytesseract.image_to_string(image_from_clipboard)
+        except TypeError as e:
+            if type(image_from_clipboard) == list:
+                return pytesseract.image_to_string(image_from_clipboard[0])
+            else:
+                self.result_text.setStyleSheet("color: red;")
+                return "Exception while trying to read the image:\n    {}".format(e)
         except Exception as e:
             self.result_text.setStyleSheet("color: red;")
             return "Exception while trying to read the image:\n    {}".format(e)
