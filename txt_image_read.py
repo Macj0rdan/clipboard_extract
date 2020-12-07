@@ -12,9 +12,7 @@ class GUI(QtWidgets.QMainWindow):
 
     def __init__(self):
         super(GUI, self).__init__()
-        uic.loadUi('main.ui', self)
-
-
+        uic.loadUi('main.ui', self)  # loads GUI file for GUI creation
 
         self.select_dir_btn = self.findChild(QtWidgets.QPushButton, "select_dir_btn")
         self.dir_text = self.findChild(QtWidgets.QLineEdit, "selected_dir_Qline_edit")
@@ -25,7 +23,7 @@ class GUI(QtWidgets.QMainWindow):
 
         self.result_text = self.findChild(QtWidgets.QTextEdit, "result_text")
 
-        self.path_tesseract = config_ini.config_rw().read_ini().get("Settings", "path")
+        self.path_tesseract = config_ini.config_rw().read_ini().get("Settings", "path")  # loads tesseract path from config file
         pytesseract.pytesseract.tesseract_cmd = self.path_tesseract
         self.dir_text.setText(self.path_tesseract)
 
