@@ -41,6 +41,7 @@ class GUI(QtWidgets.QMainWindow):
             return pytesseract.image_to_string(image_from_clipboard)
         except TypeError as e:
             if type(image_from_clipboard) == list:
+                # Todo: Add way of reading files when more then one is copied
                 return pytesseract.image_to_string(image_from_clipboard[0])
             else:
                 self.result_text.setStyleSheet("color: red;")
