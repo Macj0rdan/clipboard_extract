@@ -8,10 +8,13 @@ class config_rw():
     # if not then create it with base parameters
     def __init__(self):
         self.config = SafeConfigParser()
+        home_path = path.expanduser('~')
+        tesseract_sub_folder = "AppData\\Local\\Programs\\Tesseract-OCR\\tesseract.exe"
+        standard_tesseract_path = path.join(home_path, tesseract_sub_folder)
         self.config_file = "config.ini"
         if not path.exists(self.config_file):  # check for the file
             self.config['Settings'] = {    # default ini values
-                'path': ''
+                'path': standard_tesseract_path
                                  }
             # now write the data into file
             with open(self.config_file, 'w') as configfile:  # write file
